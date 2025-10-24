@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Power Up Challenge • 28 Days</title>
+  <meta name="description" content="Join the 28-Day Power Up Challenge. Countdown to kickoff, weekly rewards, simple rules, and real participant progress reels.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles/main.css">
+  <style type="text/tailwindcss" data-teda="tailwind-apply">
+    @layer components {
+      .btn-primary { @apply inline-flex items-center justify-center whitespace-nowrap bg-[#ff5a54] text-white px-5 py-3 rounded-full text-sm md:text-base font-semibold shadow-[0_10px_25px_rgba(255,90,84,0.35)] hover:bg-[#e84a45] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ffb3af] transition; }
+      .btn-ghost { @apply inline-flex items-center justify-center whitespace-nowrap border border-slate-300/60 bg-white text-slate-800 px-4 py-2.5 rounded-full text-sm font-medium hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200 transition; }
+      .tag { @apply inline-flex items-center gap-2 rounded-full bg-slate-900 text-slate-50 px-3 py-1 text-xs tracking-wide; }
+      .kicker { @apply uppercase tracking-[0.18em] text-[11px] md:text-xs font-semibold text-slate-500; }
+      .stat { @apply text-center; }
+      .stat-num { @apply text-3xl md:text-5xl font-extrabold text-slate-900; }
+      .stat-label { @apply text-[10px] md:text-xs uppercase tracking-wider text-slate-500; }
+      .card { @apply bg-white rounded-2xl shadow-[0_10px_30px_rgba(2,6,23,0.08)] ring-1 ring-slate-900/5; }
+      .section-title { @apply text-2xl md:text-3xl font-extrabold text-slate-900; }
+      .pill { @apply px-2.5 py-1 rounded-full text-[11px] font-semibold; }
+      .pill-ok { @apply bg-emerald-50 text-emerald-700 border border-emerald-200; }
+      .pill-wait { @apply bg-amber-50 text-amber-800 border border-amber-200; }
+      .reel-card { @apply shrink-0 w-64 md:w-72 mr-4 last:mr-0 bg-white rounded-xl overflow-hidden border border-slate-200/70 shadow-sm hover:shadow-md transition; }
+      .reel-name { @apply font-semibold text-slate-900; }
+      .reel-note { @apply text-[13px] text-slate-600 leading-snug; }
+      .input { @apply w-full border border-slate-300/70 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#ffb3af] focus:border-[#ff5a54] transition bg-white; }
+      .label { @apply text-xs font-semibold text-slate-600 mb-1; }
+      .ghost-link { @apply underline decoration-slate-300 hover:decoration-slate-600 underline-offset-4; }
+    }
+  </style>
+</head>
+<body class="bg-[#f7f8fb] text-slate-800 antialiased selection:bg-[#ffedea] selection:text-slate-900">
+  <header class="sticky top-0 z-30 backdrop-blur supports-backdrop-blur:bg-white/80 bg-white/70 border-b border-slate-200/60">
+    <nav class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between h-14">
+      <a href="#" class="flex items-center gap-2">
+        <span class="inline-block w-8 h-8 rounded-lg bg-[#ff5a54]"></span>
+        <span class="sr-only">Power Up Challenge</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#rules" class="hover:text-slate-900 text-slate-600">Rules</a>
+        <a href="#rewards" class="hover:text-slate-900 text-slate-600">Rewards</a>
+        <a href="#reels" class="hover:text-slate-900 text-slate-600">Progress</a>
+      </div>
+      <a href="app.html" class="btn-primary">Enter the Challenge</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="relative isolate" aria-labelledby="hero-title">
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div class="absolute right-[-6rem] top-16 w-[22rem] h-[22rem] rounded-full bg-[#2ec5ff]/10 blur-3xl"></div>
+        <div class="absolute left-[-6rem] bottom-10 w-[18rem] h-[18rem] rounded-full bg-[#ffc857]/20 blur-3xl"></div>
+      </div>
+
+      <div class="relative min-h-[84vh] md:min-h-[86vh]">
+        <aside class="hidden md:block absolute inset-y-0 left-0 w-[18%] bg-[#ff5a54] text-white z-20">
+          <div class="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] bg-[length:12px_12px]"></div>
+          <div class="relative h-full flex flex-col items-center justify-center gap-8 px-4">
+            <span class="tag bg-black/30 backdrop-blur">Live Countdown</span>
+            <div id="side-count" class="grid grid-cols-2 gap-4" aria-live="polite">
+              <div class="stat">
+                <div class="stat-num text-black" data-part="days">00</div>
+                <div class="stat-label text-white/80">Days</div>
+              </div>
+              <div class="stat">
+                <div class="stat-num text-black" data-part="hours">00</div>
+                <div class="stat-label text-white/80">Hours</div>
+              </div>
+              <div class="stat">
+                <div class="stat-num text-black" data-part="mins">00</div>
+                <div class="stat-label text-white/80">Min</div>
+              </div>
+              <div class="stat">
+                <div class="stat-num text-black" data-part="secs">00</div>
+                <div class="stat-label text-white/80">Sec</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="relative z-20 px-4 md:px-6 max-w-7xl mx-auto pt-10 md:pt-20 pb-16 md:pb-24" style="margin-left:0;">
+          <div class="md:ml-[20%]">
+            <p class="kicker mb-4">28-Day Power Up Challenge</p>
+            <h1 id="hero-title" class="text-4xl md:text-6xl font-black tracking-tight text-slate-900 leading-[1.05]">
+              Build habits. Track progress. Win weekly rewards.
+            </h1>
+            <p class="mt-4 md:mt-6 text-slate-600 text-base md:text-lg max-w-2xl">
+              Join a community challenge that rewards consistency. Check the rules, watch the countdown, and scroll the real progress reels from participants.
+            </p>
+            <div class="mt-6 md:mt-8 flex flex-wrap items-center gap-3">
+              <a href="app.html" class="btn-primary">Enter the Challenge</a>
+              <a href="#rules" class="btn-ghost">See Rules</a>
+              <span id="hero-mode" class="pill pill-wait">Loading...</span>
+            </div>
+
+            <div class="mt-8 md:mt-12 grid md:grid-cols-3 gap-4 md:gap-6" aria-label="Highlight stats">
+              <div class="card p-5">
+                <div class="text-sm text-slate-500">Next Milestone</div>
+                <div id="milestone-count" class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 mt-1">--:--:--</div>
+                <div id="milestone-label" class="text-xs text-slate-500 mt-1">Calculating...</div>
+              </div>
+              <div class="card p-5">
+                <div class="text-sm text-slate-500">Participants</div>
+                <div id="stat-participants" class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 mt-1">0</div>
+                <div class="text-xs text-slate-500 mt-1">and counting</div>
+              </div>
+              <div class="card p-5">
+                <div class="text-sm text-slate-500">Current Week</div>
+                <div id="stat-week" class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 mt-1">Week 1</div>
+                <div class="text-xs text-slate-500 mt-1">of 4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute inset-y-0 right-0 w-[65%] md:w-[58%] pointer-events-none select-none hidden md:block z-0" aria-hidden="true">
+          <div class="h-full bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply opacity-90"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-transparent z-10"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules" class="py-14 md:py-20">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="md:w-9/12">
+          <h2 class="section-title">Challenge Rules</h2>
+          <p class="mt-2 text-slate-600">Simple, fair, and built to help you stay consistent.</p>
+        </div>
+        <div class="mt-8 md:mt-12">
+          <ol class="grid md:grid-cols-12 gap-5 md:gap-6 items-start">
+            <li class="md:col-span-7 card p-6">
+              <div class="flex items-start gap-4">
+                <div class="h-9 w-9 rounded-full bg-[#ffc857] flex items-center justify-center font-bold">1</div>
+                <div>
+                  <h3 class="font-bold text-slate-900">Log daily activity</h3>
+                  <p class="text-sm text-slate-600 mt-1">Complete a 20+ minute workout or 7k+ steps. Consistency beats intensity. Missed a day? Get back on track tomorrow.</p>
+                </div>
+              </div>
+            </li>
+            <li class="md:col-span-5 card p-6">
+              <div class="flex items-start gap-4">
+                <div class="h-9 w-9 rounded-full bg-[#2ec5ff] flex items-center justify-center font-bold">2</div>
+                <div>
+                  <h3 class="font-bold text-slate-900">Hydrate and rest</h3>
+                  <p class="text-sm text-slate-600 mt-1">Drink water and sleep 7+ hours. Recovery days count if you hit your habits.</p>
+                </div>
+              </div>
+            </li>
+            <li class="md:col-span-6 card p-6">
+              <div class="flex items-start gap-4">
+                <div class="h-9 w-9 rounded-full bg-[#ff5a54] text-white flex items-center justify-center font-bold">3</div>
+                <div>
+                  <h3 class="font-bold text-slate-900">Share progress</h3>
+                  <p class="text-sm text-slate-600 mt-1">Post a short note or photo in the progress reel at least twice a week. Encourage others.</p>
+                </div>
+              </div>
+            </li>
+            <li class="md:col-span-6 card p-6">
+              <div class="flex items-start gap-4">
+                <div class="h-9 w-9 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold">4</div>
+                <div>
+                  <h3 class="font-bold text-slate-900">Stay respectful</h3>
+                  <p class="text-sm text-slate-600 mt-1">Be kind and keep it real. We moderate to keep the space safe and motivating.</p>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="rewards" class="py-14 md:py-20 bg-white border-y border-slate-200/70">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-end justify-between gap-4 flex-wrap">
+          <div>
+            <h2 class="section-title">Weekly Rewards</h2>
+            <p class="mt-2 text-slate-600">Unlock a new prize every week you stay consistent.</p>
+          </div>
+          <div class="text-right">
+            <div class="text-xs text-slate-500">Next reward in</div>
+            <div id="next-reward-count" class="text-xl md:text-2xl font-extrabold text-slate-900">--:--:--</div>
+          </div>
+        </div>
+        <div id="reward-grid" class="mt-8 grid md:grid-cols-12 gap-5 md:gap-6"></div>
+      </div>
+    </section>
+
+    <section id="reels" class="py-14 md:py-20">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="flex items-end justify-between gap-4 flex-wrap">
+          <div>
+            <h2 class="section-title">Participant Progress Reels</h2>
+            <p class="mt-2 text-slate-600">Swipe through real posts. Add yours to cheer others on.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="btn-ghost" id="reel-left" aria-label="Scroll left"><span aria-hidden="true">◀</span></button>
+            <button class="btn-primary" id="reel-right" aria-label="Scroll right"><span aria-hidden="true">▶</span></button>
+          </div>
+        </div>
+
+        <div class="mt-6 md:mt-8">
+          <div class="relative">
+            <div id="reel-track" class="flex overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2" aria-label="Progress reel" tabindex="0"></div>
+          </div>
+        </div>
+
+        <div class="mt-10 card p-5 md:p-6">
+          <form id="reel-form" class="grid md:grid-cols-12 gap-4 md:gap-5" novalidate>
+            <div class="md:col-span-3">
+              <label class="label" for="name">Your name</label>
+              <input id="name" name="name" class="input" type="text" placeholder="Avery" maxlength="40" required>
+            </div>
+            <div class="md:col-span-4">
+              <label class="label" for="note">Progress note</label>
+              <input id="note" name="note" class="input" type="text" placeholder="Day 7: 8k steps and core workout" maxlength="110" required>
+            </div>
+            <div class="md:col-span-3">
+              <label class="label" for="photo">Photo URL (optional)</label>
+              <input id="photo" name="photo" class="input" type="url" placeholder="https://...">
+            </div>
+            <div class="md:col-span-2 flex items-end">
+              <button type="submit" class="btn-primary w-full" id="add-reel">Add to Reel</button>
+            </div>
+            <div class="md:col-span-12 text-xs text-slate-500">Your post is saved in your browser only. You can remove it anytime in the hub.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
+        <h3 class="text-xl md:text-2xl font-bold text-slate-900">Ready to power up?</h3>
+        <p class="text-slate-600 mt-2">Jump in and start logging your wins today.</p>
+        <div class="mt-5">
+          <a href="app.html" class="btn-primary">Open Progress Hub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-10 border-t border-slate-200/60 bg-white/60">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-600">
+      <div>© <span id="year"></span> Power Up Challenge</div>
+      <div class="flex items-center gap-4">
+        <a href="#rules" class="ghost-link">Rules</a>
+        <a href="#rewards" class="ghost-link">Rewards</a>
+        <a href="#reels" class="ghost-link">Progress</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="scripts/helpers.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

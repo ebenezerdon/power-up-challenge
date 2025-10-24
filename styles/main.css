@@ -1,0 +1,45 @@
+/* Global base styles for Power Up Challenge. No Tailwind directives here. */
+:root {
+  --ink: #0f172a; /* slate-900 */
+  --paper: #f7f8fb;
+  --accent: #ff5a54;
+  --cyan: #2ec5ff;
+  --amber: #ffc857;
+}
+
+html:focus-within { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within { scroll-behavior: auto; }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Micro animation helpers */
+.fade-in { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+.fade-in.show { opacity: 1; transform: translateY(0); }
+
+/* Reel image fallback */
+.reel-img { background-size: cover; background-position: center; }
+
+/* Buttons: prevent wrap on tiny screens */
+.btn-primary, .btn-ghost { white-space: nowrap; }
+
+/* Accessible focus ring for keyboard users */
+:focus-visible { outline: 2px solid rgba(255,90,84,.6); outline-offset: 2px; }
+
+/* Card hover nudge */
+.card:hover { transform: translateY(-1px); transition: transform .2s ease; }
+
+/* Utility for truncated text */
+.ellipsis { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+/* Simple dot pattern overlay class */
+.dot-overlay {
+  background-image: radial-gradient(circle at 1px 1px, rgba(15,23,42,0.06) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Hide remove button until hover in hub */
+.card .card-actions { opacity: 0; transition: opacity .2s ease; }
+.card:hover .card-actions { opacity: 1; }
